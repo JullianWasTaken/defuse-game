@@ -66,6 +66,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.enemySpawn, function (sprite, ot
     User.setPosition(143, 105)
     game.showLongText("Don't stand on enemy spawns!", DialogLayout.Bottom)
 })
+function killStreakReward () {
+    killStreak = 0
+    killStreakRequirement = killStreakRequirement + randint(2, 6)
+    info.changeLifeBy(1)
+}
 function intro () {
     game.showLongText("The CIA has tasked you with defending an EMP bomb until detonation. You are controlling a robot remotely and touching the enemy robots will kill them. Good luck agent.", DialogLayout.Bottom)
 }
@@ -111,10 +116,14 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
         xAcceleration = 100
         yAcceleration = 100
     }
+    info.changeScoreBy(1)
+    killStreak += 1
 })
 let Robot: Sprite = null
 let endExplosionBlock: Sprite = null
 let projectile: Sprite = null
+let killStreakRequirement = 0
+let killStreak = 0
 let yAcceleration = 0
 let xAcceleration = 0
 let User: Sprite = null
@@ -163,12 +172,17 @@ info.setLife(3)
 info.setScore(0)
 User.setPosition(143, 105)
 info.startCountdown(randint(45, 240))
+killStreak = 0
+killStreakRequirement = 5
 game.onUpdate(function () {
     if (User.vx < 0) {
         User.image.flipX()
     }
     controller.moveSprite(User, xAcceleration, yAcceleration)
     Robot.follow(User)
+    if (killStreak >= killStreakRequirement) {
+        killStreakReward()
+    }
 })
 game.onUpdateInterval(randint(10000, 40000), function () {
     for (let value of tiles.getTilesByType(assets.tile`myTile5`)) {
