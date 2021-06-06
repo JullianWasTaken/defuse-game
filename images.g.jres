@@ -1,0 +1,12 @@
+{
+    "image1": {
+        "data": "hwQQACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPD//wAAAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAAAAC7u7u7u7sAAAAAAACwu7u7//////+/AAD/AAAAsP//v///////v////wAAALCP+L///M///L8AAP8AAAC///+///////+/AAAAAAAAv///v///////vwAAAAAAALCP+L///M///L8AAP8AAACw//+///////+/////AAAAsLu7u///////vwAA/wAAAAAAAAC7u7u7u7sAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAAAAAADw//8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "Temporary asset"
+    },
+    "*": {
+        "mimeType": "image/x-mkcd-f4",
+        "dataEncoding": "base64",
+        "namespace": "myImages"
+    }
+}
