@@ -6,6 +6,9 @@ namespace SpriteKind {
     export const scenery = SpriteKind.create()
     export const sceneryCarType = SpriteKind.create()
 }
+/**
+ * Repeat blocks dont work for some reason :(
+ */
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (initiatorChecker == true) {
         if (User.vx > 0) {
@@ -70,13 +73,12 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         pause(shootingDelay)
     }
 })
-/**
- * Repeat blocks dont work for some reason :(
- */
 function storyStart () {
     // Serves to stop forever and gameUpdate functions till the initialization happens
     initiatorChecker = false
     if (initiatorChecker == false) {
+        color.FadeToBlack.startScreenEffect(0)
+        color.startFade(color.Black, color.originalPalette, 2500)
         story.startCutscene(function () {
             story.setSoundEnabled(true)
             effects.starField.startScreenEffect()
@@ -441,7 +443,7 @@ function storyStart () {
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (initiatorChecker == true && devTestChecker == true) {
-        spawnEnemies()
+        spawnEnemyMain()
     }
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.replacementBlock, function (sprite, otherSprite) {
@@ -751,19 +753,19 @@ game.onUpdate(function () {
 })
 forever(function () {
     if (initiatorChecker == true) {
-        if (User.vx >= 1 || User.vx <= -1 || (User.vy >= 1 || User.vy <= -1)) {
-            scene.cameraShake(2, 100)
-        }
-    }
-})
-forever(function () {
-    if (initiatorChecker == true) {
         if (User.vx < 0) {
             User.image.flipX()
         }
         controller.moveSprite(User, xAcceleration, yAcceleration)
         if (killStreak >= killStreakRequirement) {
             killStreakReward()
+        }
+    }
+})
+forever(function () {
+    if (initiatorChecker == true) {
+        if (User.vx >= 1 || User.vx <= -1 || (User.vy >= 1 || User.vy <= -1)) {
+            scene.cameraShake(2, 100)
         }
     }
 })
